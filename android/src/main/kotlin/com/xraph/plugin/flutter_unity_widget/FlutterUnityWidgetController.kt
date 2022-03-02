@@ -16,7 +16,6 @@ import android.widget.TextView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.unity3d.player.IUnityPlayerLifecycleEvents
-import com.unity3d.player.MultiWindowSupport
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
@@ -261,7 +260,6 @@ class FlutterUnityWidgetController(
     }
 
     override fun onStart(owner: LifecycleOwner) {
-        if (MultiWindowSupport.getAllowResizableWindow(getActivity(_context))) return
         if(UnityPlayerUtils.isUnityReady) {
             if(!UnityPlayerUtils.isUnityLoaded) {
                 createPlayer()
@@ -273,7 +271,6 @@ class FlutterUnityWidgetController(
     }
 
     override fun onResume(owner: LifecycleOwner) {
-        if (MultiWindowSupport.getAllowResizableWindow(getActivity(_context))) return
         if(UnityPlayerUtils.isUnityReady) {
             if(!UnityPlayerUtils.isUnityLoaded && UnityPlayerUtils.options.unloadOnDispose) {
                 createPlayer()
@@ -287,7 +284,6 @@ class FlutterUnityWidgetController(
     }
 
     override fun onPause(owner: LifecycleOwner) {
-        if (MultiWindowSupport.getAllowResizableWindow(getActivity(_context))) return
         if(UnityPlayerUtils.isUnityReady && UnityPlayerUtils.isUnityLoaded) {
             Handler(Looper.getMainLooper()).post {
                 UnityPlayerUtils.pause()
@@ -296,7 +292,6 @@ class FlutterUnityWidgetController(
     }
 
     override fun onStop(owner: LifecycleOwner) {
-        if (MultiWindowSupport.getAllowResizableWindow(getActivity(_context))) return
         if(UnityPlayerUtils.isUnityReady && UnityPlayerUtils.isUnityLoaded) {
             Handler(Looper.getMainLooper()).post {
                 UnityPlayerUtils.pause()
